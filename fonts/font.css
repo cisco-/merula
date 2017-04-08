@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'AurelisADFScriptNo2Std-CdIta';
+  src: url('AurelisADFScriptNo2Std-CdIta.eot');
+  src: url('AurelisADFScriptNo2Std-CdIta.woff2') format('woff2'),
+       url('AurelisADFScriptNo2Std-CdIta.woff') format('woff'),
+       url('AurelisADFScriptNo2Std-CdIta.ttf') format('truetype'),
+       url('AurelisADFScriptNo2Std-CdIta.svg#AurelisADFScriptNo2Std-CdIta') format('svg'),
+       url('AurelisADFScriptNo2Std-CdIta.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
