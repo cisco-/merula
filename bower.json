@@ -1,0 +1,21 @@
+{
+  "name": "merula",
+  "authors": [
+    "Francisco Laguna <francisco.laguna@open-xchange.com>"
+  ],
+  "description": "Merula Art+Design",
+  "main": "index.html",
+  "license": "GPL-v3.0",
+  "homepage": "https://merula-art.de",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "sw-toolbox": "^3.6.1"
+  }
+}

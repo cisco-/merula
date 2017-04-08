@@ -1,0 +1,138 @@
+#! /usr/bin/env ruby
+
+require 'fileutils'
+require 'json'
+require 'ostruct'
+require 'erb'
+
+include FileUtils
+
+puts "Recreating build dir"
+rm_rf 'build'
+mkdir 'build'
+puts "Copying items"
+cp_r 'items', 'build/'
+puts "Copying fonts"
+cp_r 'fonts', 'build/'
+puts "Copying bower components"
+cp_r 'bower_components', 'build/'
+
+puts "Copying logo"
+cp 'logo.jpg', 'build/logo.jpg'
+
+puts "Copying sw.html"
+cp 'sw.html', 'build/sw.html'
+
+
+puts "Collecting metadata"
+# Collect metadata
+sections = []
+all_items = []
+Dir.glob('items/*') do
+	|section_path|
+	section = OpenStruct.new
+	section.id = section_path.split(/\//).last
+	manifest = JSON.parse(File.read("#{section_path}/manifest.json"), symbolize_names: true)
+	section.title = manifest[:title]
+	section.description = File.read("#{section_path}/description.html")
+	section.index = manifest[:index]
+	# Collect items for section
+	section.items = []
+	Dir.glob("#{section_path}/*") do
+		|item_path|
+		next if item_path =~ /manifest\.json$/
+		next if item_path =~ /\.html$/
+		item = OpenStruct.new
+		item.id = item_path.split(/\//).last
+		item.description = File.read("#{item_path}/description.html")
+		item_manifest = JSON.parse(File.read("#{item_path}/manifest.json"), symbolize_names: true)
+		item.title = item_manifest[:title]
+		item.section = section
+		section.items.push(item)
+		all_items.push(item)
+	end
+	sections.push(section)
+end
+sections = sections.sort_by {|s| s.index }
+
+puts "Loading templates"
+$templates = {
+	index: ERB.new(File.read('templates/index.html.erb')),
+	impressum: ERB.new(File.read('templates/impressum.html.erb')),
+	privacy: ERB.new(File.read('templates/privacy.html.erb')),
+	gallery: ERB.new(File.read('templates/gallery.html.erb')),
+	item: ERB.new(File.read('templates/item.html.erb')),
+	service_worker: ERB.new(File.read('templates/sw.js.erb'))
+}
+
+def generate_static_page(type, sections, items)
+	b = binding
+	$templates[type].result b
+end
+
+def generate_section(section, sections)
+	b = binding
+	$templates[:gallery].result b
+end
+
+def generate_item(item, sections)
+	section = item.section
+	b = binding
+	$templates[:item].result b
+end
+
+def generate_service_worker(sections)
+	b = binding
+	$templates[:service_worker].result b
+end
+
+# Generate index
+puts "Generating build/index.html"
+File.open('build/index.html', 'w') do
+	|fh|
+	fh.puts(generate_static_page(:index, sections, all_items))
+end
+
+# Generate impressum
+puts "Generating build/impressum.html"
+File.open('build/impressum.html', 'w') do
+	|fh|
+	fh.puts(generate_static_page(:impressum, sections, all_items))
+end
+
+# Generate impressum
+puts "Generating build/privacy.html"
+File.open('build/privacy.html', 'w') do
+	|fh|
+	fh.puts(generate_static_page(:privacy, sections, all_items))
+end
+
+# Generate galleries
+sections.each do 
+	|section|
+	puts "Generating build/#{section.id}.html"
+	File.open("build/#{section.id}.html", 'w') do
+		|fh|
+		fh.puts(generate_section(section, sections))
+	end
+	# Generate item pages
+	mkdir "build/#{section.id}"
+	section.items.each do
+		|item|
+		puts "Generating build/items/#{section.id}/#{item.id}.html"
+		File.open("build/items/#{section.id}/#{item.id}.html", 'w') do
+			|fh|
+			fh.puts(generate_item(item, sections))
+		end
+	end
+end
+
+
+# Generate overall manifest
+puts "Generating build/sw.js"
+File.open('build/sw.js', 'w') do
+	|fh|
+	fh.puts(generate_service_worker(sections))
+end
+
+

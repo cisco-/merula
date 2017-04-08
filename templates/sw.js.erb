@@ -1,0 +1,27 @@
+var time='<%= Time.now.to_s %>'
+importScripts('bower_components/sw-toolbox/sw-toolbox.js');
+toolbox.debug = true;
+
+var precache = ['/index.html', '/impressum.html', '/privacy.html']
+<% sections.each do |section| %>
+precache.push('/<%= section.id %>.html');
+	<% section.items.each do |item| %>
+precache.push('/items/<%= section.id %>/<%= item.id %>.html');
+precache.push('/items/<%= section.id %>/<%= item.id %>/main.png');
+precache.push('/items/<%= section.id %>/<%= item.id %>/thumb.png');
+	<% end %>
+<% end %>
+toolbox.precache(precache);
+toolbox.router.default = toolbox.cacheFirst;
+
+
+// Claim clients so that the very first page load is controlled by a service
+// worker. (Important for responding correctly in offline state.)
+self.addEventListener('activate', function () {
+	self.clients.claim();
+});
+
+// Make sure the SW the page we register() is the service we use.
+self.addEventListener('install', function () {
+	self.skipWaiting();
+});

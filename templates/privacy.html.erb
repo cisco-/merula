@@ -1,0 +1,153 @@
+<!doctype html>
+<html ⚡>
+	<head>
+		<meta charset="utf-8">
+		<title>Merula Art+Design</title>
+		<script async src="https://cdn.ampproject.org/v0.js"></script>
+		<script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+		<script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
+		<link rel="canonical" href="/index.html">
+		<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+		 <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "headline": "Merula Art+Design"
+    }
+    </script>
+    <style amp-custom>
+    	*, *:before, *:after {
+			  box-sizing: inherit;
+			}
+			html {
+			  box-sizing: border-box;
+			}
+			@font-face {
+			  font-family: 'AurelisADFScriptNo2Std-CdIta';
+			  src: url('fonts/AurelisADFScriptNo2Std-CdIta.eot');
+			  src: url('fonts/AurelisADFScriptNo2Std-CdIta.woff2') format('woff2'),
+			       url('fonts/AurelisADFScriptNo2Std-CdIta.woff') format('woff'),
+			       url('fonts/AurelisADFScriptNo2Std-CdIta.ttf') format('truetype'),
+			       url('fonts/AurelisADFScriptNo2Std-CdIta.svg#AurelisADFScriptNo2Std-CdIta') format('svg'),
+			       url('fonts/AurelisADFScriptNo2Std-CdIta.eot?#iefix') format('embedded-opentype');
+			  font-weight: normal;
+			  font-style: normal;
+			}
+			body {
+				font-family: 'AurelisADFScriptNo2Std-CdIta', Serif;
+			}
+		  ul.navigation {
+		    list-style-type: none;
+    		margin: 0;
+    		padding: 0;
+    		width: 100%;
+    		display: flex;
+		    align-items: flex-start;
+		  }
+		  ul.navigation li {
+		  	flex-grow: 1;
+		  	padding-top: 10px;
+		  	padding-left: 10px;
+		  }
+		  ul.navigation a {
+		  	font-size: 1.1em;
+		  	text-decoration: none;
+		  	cursor: pointer;
+		  	color:#bbb;
+		  }
+		  ul.navigation a.active {
+		  	color: #333;
+		  }
+			ul.navigation.bottom {
+				width:30%;
+				min-width: 250px;
+			}
+		  div.quote {
+		  	font-family: serif;
+		  	font-size: 0.8em;
+		  	background-color: #bbb;
+		  	padding: 5em;
+		  	color: #333;
+
+		  }
+		  .top_images {
+		  	padding-left: 10px
+		  }
+		  .top_images img {
+		  	padding-left: 20px
+		  }
+		</style>
+		<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+	</head>
+	<body>
+		<amp-install-serviceworker src="sw.js" data-iframe-src="sw.html" layout="nodisplay"></amp-install-serviceworker>
+		<ul class="navigation">
+			<li>
+				<a href="/index.html">
+				<amp-img class="header-image" src="/logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img></a>
+			</li>
+			<% sections.each do |other_section| %>
+			<li>
+				<a href="/<%= other_section.id %>.html"><%= other_section.title %> </a>
+			</li>
+			<% end %>
+			<li>
+				<a href="#">Über </a>
+			</li>
+			<li>
+				<a href="#">Kontakt </a>
+			</li>
+		</ul>
+		<amp-carousel class="top_images" height="210"
+		  layout="fixed-height"
+		  type="carousel">
+		   <% items.each do |item| %>
+		  	<a href="/items/<%= item.section.id %>/<%= item.id %>.html">
+		  	<amp-img src="/items/<%= item.section.id %>/<%= item.id %>/thumb.png"
+		  	  width="210"
+		  	  height="178"
+		  	  alt="<%= item.title %>"></amp-img></a>
+		  <% end %>
+		</amp-carousel>
+		<div class="quote">
+			<p><strong>Datenschutz</strong></p>
+<p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
+<p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder E-Mail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.</p>
+<p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
+<p> </p>
+<p><strong>Cookies</strong></p>
+<p>Die Internetseiten verwenden teilweise so genannte Cookies. Cookies richten auf Ihrem Rechner keinen Schaden an und enthalten keine Viren. Cookies dienen dazu, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen. Cookies sind kleine Textdateien, die auf Ihrem Rechner abgelegt werden und die Ihr Browser speichert.</p>
+<p>Die meisten der von uns verwendeten Cookies sind so genannte „Session-Cookies“. Sie werden nach Ende Ihres Besuchs automatisch gelöscht. Andere Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen. Diese Cookies ermöglichen es uns, Ihren Browser beim nächsten Besuch wiederzuerkennen.</p>
+<p>Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browser aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.</p>
+<p> </p>
+<p><strong>Server-Log-Files</strong></p>
+<p>Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log Files, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p>
+<ul>
+<li>Browsertyp/ Browserversion</li>
+<li>verwendetes Betriebssystem</li>
+<li>Referrer URL</li>
+<li>Hostname des zugreifenden Rechners</li>
+<li>Uhrzeit der Serveranfrage</li>
+</ul>
+<p><br />Diese Daten sind nicht bestimmten Personen zuordenbar. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Wir behalten uns vor, diese Daten nachträglich zu prüfen, wenn uns konkrete Anhaltspunkte für eine rechtswidrige Nutzung bekannt werden.</p>
+<p> </p>
+<p><strong>Auskunft, Löschung, Sperrung</strong></p>
+<p>Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung sowie ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten. Hierzu sowie zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit unter der im Impressum angegebenen Adresse an uns wenden.</p>
+<p> </p>
+<p><strong>Widerspruch Werbe-Mails</strong></p>
+<p>Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-E-Mails, vor.</p>
+<p> </p>
+<p><em>Quellenangabe: <a href="https://www.e-recht24.de">https://www.e-recht24.de</a></em></p>
+</div>
+
+		</div>
+		<ul class="bottom navigation">
+			<li>
+				<a href="/impressum.html">Impressum</a>
+			</li>
+			<li>
+				<a href="/privacy.html" class="active">Datenschutzerklärung</a>
+			</li>
+		</ul>
+	</body>
+</html>

@@ -5,14 +5,14 @@
 		<title>Merula Art+Design</title>
 		<script async src="https://cdn.ampproject.org/v0.js"></script>
 		<script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
-		<link rel="canonical" href="amp.html">
+		<script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
+		<link rel="canonical" href="/index.html">
 		<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 		 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
       "@type": "WebSite",
-      "headline": "Merula Art+Design",
-      "thumbnailUrl": "TODO"
+      "headline": "Merula Art+Design"
     }
     </script>
     <style amp-custom>
@@ -79,45 +79,33 @@
 		<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 	</head>
 	<body>
+		<amp-install-serviceworker src="sw.js" data-iframe-src="sw.html" layout="nodisplay"></amp-install-serviceworker>
 		<ul class="navigation">
 			<li>
 				<amp-img class="header-image" src="logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img>
 			</li>
+			<% sections.each do |other_section| %>
 			<li>
-				<a href="#">Larp & Mittelalter</a>
+				<a href="/<%= other_section.id %>.html"><%= other_section.title %> </a>
+			</li>
+			<% end %>
+			<li>
+				<a href="#">Über </a>
 			</li>
 			<li>
-				<a href="#">Trauringe</a>
-			</li>
-			<li>
-				<a href="#">Schmückendes</a>
-			</li>
-			<li>
-				<a href="#">Über</a>
-			</li>
-			<li>
-				<a href="#">Kontakt</a>
+				<a href="#">Kontakt </a>
 			</li>
 		</ul>
 		<amp-carousel class="top_images" height="210"
 		  layout="fixed-height"
 		  type="carousel">
-		  <amp-img src="items/anhaenger.png"
-		    width="210"
-		    height="178"
-		    alt="Anhänger"></amp-img>
-		  <amp-img src="items/ringe.png"
-		    width="210"
-		    height="178"
-		    alt="Ringe"></amp-img>
-		  <amp-img src="items/wolf.png"
-		    width="210"
-		    height="178"
-		    alt="Wolf"></amp-img>
- 		  <amp-img src="items/ohrringe.png"
-		    width="210"
-		    height="178"
-		    alt="Ohrringe"></amp-img>
+		   <% items.each do |item| %>
+		  	<a href="/items/<%= item.section.id %>/<%= item.id %>.html">
+		  	<amp-img src="/items/<%= item.section.id %>/<%= item.id %>/thumb.png"
+		  	  width="210"
+		  	  height="178"
+		  	  alt="<%= item.title %>"></amp-img></a>
+		  <% end %>
 		</amp-carousel>
 		<div class="quote center">
 			"Kunst ist der wundersame Schmuck des Lebens.<br>
@@ -127,10 +115,10 @@
 		</div>
 		<ul class="bottom navigation">
 			<li>
-				<a href="#">Impressum</a>
+				<a href="/impressum.html">Impressum</a>
 			</li>
 			<li>
-				<a href="#">Datenschutzerklärung</a>
+				<a href="/privacy.html">Datenschutzerklärung</a>
 			</li>
 		</ul>
 	</body>
