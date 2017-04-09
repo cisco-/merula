@@ -1,13 +1,16 @@
 var time='<%= Time.now.to_s %>'
 importScripts('bower_components/sw-toolbox/sw-toolbox.js');
-toolbox.debug = true;
 
-var precache = ['/index.html', '/impressum.html', '/privacy.html']
+toolbox.options.cache.name='merula'
+caches.delete('merula');
+
+toolbox.options.debug = true;
+
+var precache = ['/index.html', '/impressum.html', '/privacy.html', '/logo.jpg']
 <% sections.each do |section| %>
 precache.push('/<%= section.id %>.html');
 	<% section.items.each do |item| %>
 precache.push('/items/<%= section.id %>/<%= item.id %>.html');
-precache.push('/items/<%= section.id %>/<%= item.id %>/main.png');
 precache.push('/items/<%= section.id %>/<%= item.id %>/thumb.png');
 	<% end %>
 <% end %>
