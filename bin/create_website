@@ -44,7 +44,6 @@ Dir.glob('items/*') do
 		next if item_path =~ /\.html$/
 		item = OpenStruct.new
 		item.id = item_path.split(/\//).last
-		item.description = File.read("#{item_path}/description.html")
 		item_manifest = JSON.parse(File.read("#{item_path}/manifest.json"), symbolize_names: true)
 		item.title = item_manifest[:title]
 		item.section = section
@@ -59,9 +58,10 @@ puts "Loading templates"
 $templates = {
 	index: ERB.new(File.read('templates/index.html.erb')),
 	impressum: ERB.new(File.read('templates/impressum.html.erb')),
+	about: ERB.new(File.read('templates/about.html.erb')),
+	contact: ERB.new(File.read('templates/contact.html.erb')),
 	privacy: ERB.new(File.read('templates/privacy.html.erb')),
 	gallery: ERB.new(File.read('templates/gallery.html.erb')),
-	item: ERB.new(File.read('templates/item.html.erb')),
 	service_worker: ERB.new(File.read('templates/sw.js.erb'))
 }
 
@@ -73,12 +73,6 @@ end
 def generate_section(section, sections)
 	b = binding
 	$templates[:gallery].result b
-end
-
-def generate_item(item, sections)
-	section = item.section
-	b = binding
-	$templates[:item].result b
 end
 
 def generate_service_worker(sections)
@@ -100,12 +94,27 @@ File.open('build/impressum.html', 'w') do
 	fh.puts(generate_static_page(:impressum, sections, all_items))
 end
 
-# Generate impressum
+# Generate Datenschutz
 puts "Generating build/privacy.html"
 File.open('build/privacy.html', 'w') do
 	|fh|
 	fh.puts(generate_static_page(:privacy, sections, all_items))
 end
+
+# Generate About
+puts "Generating build/about.html"
+File.open('build/about.html', 'w') do
+	|fh|
+	fh.puts(generate_static_page(:about, sections, all_items))
+end
+
+# Generate Contact
+puts "Generating build/contact.html"
+File.open('build/contact.html', 'w') do
+	|fh|
+	fh.puts(generate_static_page(:contact, sections, all_items))
+end
+
 
 # Generate galleries
 sections.each do 
@@ -117,14 +126,6 @@ sections.each do
 	end
 	# Generate item pages
 	mkdir "build/#{section.id}"
-	section.items.each do
-		|item|
-		puts "Generating build/items/#{section.id}/#{item.id}.html"
-		File.open("build/items/#{section.id}/#{item.id}.html", 'w') do
-			|fh|
-			fh.puts(generate_item(item, sections))
-		end
-	end
 end
 
 

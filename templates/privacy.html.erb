@@ -113,23 +113,23 @@
 			</li>
 			<% end %>
 			<li>
-				<a href="#">Über </a>
+				<a href="/about.html">Über </a>
 			</li>
 			<li>
-				<a href="#">Kontakt </a>
+				<a href="/contact.html">Kontakt </a>
 			</li>
 		</ul>
 		<amp-carousel class="top_images" height="210"
-		  layout="fixed-height"
-		  type="carousel">
-		   <% items.each do |item| %>
-		  	<a href="/items/<%= item.section.id %>/<%= item.id %>.html">
-		  	<amp-img src="/items/<%= item.section.id %>/<%= item.id %>/thumb.png"
-		  	  width="210"
-		  	  height="178"
-		  	  alt="<%= item.title %>"></amp-img></a>
-		  <% end %>
-		</amp-carousel>
+      layout="fixed-height"
+      type="carousel">
+       <% items.each do |item| %>
+        <a href="/<%= item.section.id %>.html">
+        <amp-img src="/items/<%= item.section.id %>/<%= item.id %>/thumb.png"
+          width="210"
+          height="178"
+          alt="<%= item.title %>"></amp-img></a>
+      <% end %>
+    </amp-carousel>
 		<div class="quote">
 			<p><strong>Datenschutz</strong></p>
 <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
@@ -170,7 +170,7 @@
 				<a href="/privacy.html" class="active">Datenschutzerklärung</a>
 			</li>
 			<li>
-				<a href="https://www.facebook.com/MerulaDesign/" class="facebook">Facebook</a>
+				<a href="https://www.facebook.com/MerulaDesign/" target="_blank" class="facebook">Facebook</a>
 			</li>
 		</ul>
 	</body>

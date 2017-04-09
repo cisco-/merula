@@ -72,19 +72,26 @@
 		  	cursor: pointer;
 		  	color:#bbb;
 		  }
+		  a.active {
+		  	color: #333;
+		  }
 		  a.facebook {
 		  	color: #46b;
 		  }
-			ul.navigation.bottom {
+
+   		  ul.navigation.bottom {
 				width:30%;
 				min-width: 250px;
-			}
+		  }
 		  div.quote {
 		  	font-size: 1.2em;
 		  	background-color: #bbb;
-		  	padding-top: 6em;
-		  	padding-bottom: 6em;
+		  	padding-top: 5em;
+		  	padding-bottom: 5em;
 		  	color: #333;
+		  }
+		  div.quote a {
+		  	color: #fff;
 		  }
 		  div.quote.center {
 		  	text-align: center
@@ -102,7 +109,8 @@
 		<amp-install-serviceworker src="sw.js" data-iframe-src="sw.html" layout="nodisplay"></amp-install-serviceworker>
 		<ul class="navigation">
 			<li>
-				<amp-img class="header-image" src="logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img>
+				<a href="/index.html">
+				<amp-img class="header-image" src="/logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img></a>
 			</li>
 			<% sections.each do |other_section| %>
 			<li>
@@ -110,7 +118,7 @@
 			</li>
 			<% end %>
 			<li>
-				<a href="/about.html">Über </a>
+				<a href="/about.html" class="active">Über </a>
 			</li>
 			<li>
 				<a href="/contact.html">Kontakt </a>
@@ -128,10 +136,15 @@
 		  <% end %>
 		</amp-carousel>
 		<div class="quote center">
-			"Kunst ist der wundersame Schmuck des Lebens.<br>
-			Sie kann nichts anderes sein, weil das Wesen aller<br>
-			Künste darin besteht zu schmücken."<br>
-			Henry van de Velde
+			<p>
+			Unter dem Namen Merula Art & Design fertige ich, Goldschmiedin und Kommunikationsdesignerin Carola Brochwitz, Unikatschmuck für jede Gelegenheit. Ob Liverollenspiel, Mittelalter, Trau- und Verlobungsringe oder besonderen Schmuck für den Alltag.
+			</p>
+			<p>
+			Im Vordergrund steht für mich, das richtige Schmuckstück für den jeweiligen Kunden zu entwickeln und herzustellen, unter Berücksichtigung von Wünschen und Vorstellungen, aber auch von Tragekomfort und Materialeignung für den jeweiligen Einsatz.
+			</p>
+			<p>
+			Diese Website soll einen kleinen Eindruck der vielfältigen Möglichkeiten vermitteln, Anfragen können gerne über die <a href="/contact.html">Kontaktseite</a> gestellt werden.
+			</p>
 		</div>
 		<ul class="bottom navigation">
 			<li>

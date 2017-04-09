@@ -90,6 +90,9 @@
 		  	padding-bottom: 5em;
 		  	color: #333;
 		  }
+      div.quote a {
+        color: #fff;
+      }
 		  div.quote.center {
 		  	text-align: center
 		  }
@@ -115,23 +118,23 @@
 			</li>
 			<% end %>
 			<li>
-				<a href="#">Über </a>
+				<a href="/about.html">Über </a>
 			</li>
 			<li>
-				<a href="#">Kontakt </a>
+				<a href="/contact.html">Kontakt </a>
 			</li>
 		</ul>
 		<amp-carousel class="top_images" height="210"
-		  layout="fixed-height"
-		  type="carousel">
-		   <% items.each do |item| %>
-		  	<a href="/items/<%= item.section.id %>/<%= item.id %>.html">
-		  	<amp-img src="/items/<%= item.section.id %>/<%= item.id %>/thumb.png"
-		  	  width="210"
-		  	  height="178"
-		  	  alt="<%= item.title %>"></amp-img></a>
-		  <% end %>
-		</amp-carousel>
+      layout="fixed-height"
+      type="carousel">
+       <% items.each do |item| %>
+        <a href="/<%= item.section.id %>.html">
+        <amp-img src="/items/<%= item.section.id %>/<%= item.id %>/thumb.png"
+          width="210"
+          height="178"
+          alt="<%= item.title %>"></amp-img></a>
+      <% end %>
+    </amp-carousel>
 		<div class="quote center">
 			<b>Carola Brochwitz</b><br>
 			Flamländer Straße 10<br>
