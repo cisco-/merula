@@ -5,6 +5,8 @@
 		<title>Merula Art+Design</title>
 		<script async src="https://cdn.ampproject.org/v0.js"></script>
 		<script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+		<script async custom-element="amp-analytics"
+    src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
 		<link rel="canonical" href="/<%= section.id %>.html">
 		<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 		 <script type="application/ld+json">
@@ -14,6 +16,21 @@
       "headline": "Merula Art+Design - <%= section.title %>",
     }
     </script>
+    <amp-analytics type="googleanalytics">
+	<script type="application/json">
+	{
+	  "vars": {
+	    "account": "UA-97069920-1"
+	  },
+	  "triggers": {
+	    "trackPageview": {
+	      "on": "visible",
+	      "request": "pageview"
+	    }
+	  }
+	}
+	</script>
+	</amp-analytics>
     <style amp-custom>
     	*, *:before, *:after {
 			  box-sizing: inherit;
