@@ -1,16 +1,16 @@
 <!doctype html>
 <html ⚡>
-	<head>
-		<meta charset="utf-8">
-		<title>Merula Art+Design</title>
-		<script async src="https://cdn.ampproject.org/v0.js"></script>
-		<script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
-		<script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
-		<script async custom-element="amp-analytics"
+  <head>
+    <meta charset="utf-8">
+    <title>Merula Art+Design</title>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+    <script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
+    <script async custom-element="amp-analytics"
     src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-		<link rel="canonical" href="/index.html">
-		<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-		 <script type="application/ld+json">
+    <link rel="canonical" href="/index.html">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+     <script type="application/ld+json">
     {
       "@context": "http://schema.org",
       "@type": "WebSite",
@@ -18,108 +18,173 @@
     }
     </script>
     <amp-analytics type="googleanalytics">
-	<script type="application/json">
-	{
-	  "vars": {
-	    "account": "UA-97069920-1"
-	  },
-	  "triggers": {
-	    "trackPageview": {
-	      "on": "visible",
-	      "request": "pageview"
-	    }
-	  }
-	}
-	</script>
-	</amp-analytics>
+  <script type="application/json">
+  {
+    "vars": {
+      "account": "UA-97069920-1"
+    },
+    "triggers": {
+      "trackPageview": {
+        "on": "visible",
+        "request": "pageview"
+      }
+    }
+  }
+  </script>
+  </amp-analytics>
     <style amp-custom>
-    	*, *:before, *:after {
-			  box-sizing: inherit;
-			}
-			html {
-			  box-sizing: border-box;
-			}
-			@font-face {
-			  font-family: 'AurelisADFScriptNo2Std-CdIta';
-			  src: url('fonts/AurelisADFScriptNo2Std-CdIta.eot');
-			  src: url('fonts/AurelisADFScriptNo2Std-CdIta.woff2') format('woff2'),
-			       url('fonts/AurelisADFScriptNo2Std-CdIta.woff') format('woff'),
-			       url('fonts/AurelisADFScriptNo2Std-CdIta.ttf') format('truetype'),
-			       url('fonts/AurelisADFScriptNo2Std-CdIta.svg#AurelisADFScriptNo2Std-CdIta') format('svg'),
-			       url('fonts/AurelisADFScriptNo2Std-CdIta.eot?#iefix') format('embedded-opentype');
-			  font-weight: normal;
-			  font-style: normal;
-			}
-			body {
-				font-family: 'AurelisADFScriptNo2Std-CdIta', Serif;
-			}
-		  ul.navigation {
-		    list-style-type: none;
-    		margin: 0;
-    		padding: 0;
-    		width: 100%;
-    		display: flex;
-		    align-items: flex-start;
-		  }
-		  ul.navigation li {
-		  	flex-grow: 1;
-		  	padding-top: 10px;
-		  	padding-left: 10px;
-		  }
-		  ul.navigation a {
-		  	font-size: 1.1em;
-		  	text-decoration: none;
-		  	cursor: pointer;
-		  	color:#bbb;
-		  }
-		  ul.navigation a.active {
-		  	color: #333;
-		  }
-		  ul.navigation a.facebook {
-		  	color: #46b;
-		  }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+      html {
+        box-sizing: border-box;
+      }
+      @font-face {
+        font-family: 'AurelisADFScriptNo2Std-CdIta';
+        src: url('fonts/AurelisADFScriptNo2Std-CdIta.eot');
+        src: url('fonts/AurelisADFScriptNo2Std-CdIta.woff2') format('woff2'),
+             url('fonts/AurelisADFScriptNo2Std-CdIta.woff') format('woff'),
+             url('fonts/AurelisADFScriptNo2Std-CdIta.ttf') format('truetype'),
+             url('fonts/AurelisADFScriptNo2Std-CdIta.svg#AurelisADFScriptNo2Std-CdIta') format('svg'),
+             url('fonts/AurelisADFScriptNo2Std-CdIta.eot?#iefix') format('embedded-opentype');
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        font-family: 'AurelisADFScriptNo2Std-CdIta', Serif;
+      }
+      .navigation {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+      }
+      .navigation li {
+        flex-grow: 1;
+        padding-top: 10px;
+        padding-left: 10px;
+      }
+      .navigation a {
+        font-size: 1.1em;
+        text-decoration: none;
+        cursor: pointer;
+        color:#bbb;
+      }
+      .navigation a.active {
+        color: #333;
+      }
+      .navigation a.facebook {
+        color: #46b;
+      }
 
-			ul.navigation.bottom {
-				width:30%;
-				min-width: 250px;
-			}
-		  div.quote {
-		  	font-family: serif;
-		  	font-size: 0.8em;
-		  	background-color: #bbb;
-		  	padding: 5em;
-		  	color: #333;
+      .navigation.bottom {
+        width:30%;
+        min-width: 250px;
+      }
+      div.quote {
+        font-family: serif;
+        font-size: 0.8em;
+        background-color: #bbb;
+        padding: 5em;
+        color: #333;
 
-		  }
-		  .top_images {
-		  	padding-left: 10px
-		  }
-		  .top_images img {
-		  	padding-left: 20px
-		  }
-		</style>
-		<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-	</head>
-	<body>
-		<amp-install-serviceworker src="sw.js" data-iframe-src="sw.html" layout="nodisplay"></amp-install-serviceworker>
-		<ul class="navigation">
-			<li>
-				<a href="/index.html">
-				<amp-img class="header-image" src="/logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img></a>
-			</li>
-			<% sections.each do |other_section| %>
-			<li>
-				<a href="/<%= other_section.id %>.html"><%= other_section.title %> </a>
-			</li>
-			<% end %>
-			<li>
-				<a href="/about.html">Über </a>
-			</li>
-			<li>
-				<a href="/contact.html">Kontakt </a>
-			</li>
-		</ul>
-		<amp-carousel class="top_images" height="210"
+      }
+      .top_images {
+        padding-left: 10px
+      }
+      .top_images img {
+        padding-left: 20px
+      }
+      .home {
+        display: none;
+      }
+      .slim {
+        display: none;
+      }
+      @media only screen and (min-width: 551px) and (max-width: 700px)  {
+        .header-image {
+          display: none;
+        }
+        .home {
+          display: block;
+        }
+        .navigation {
+          min-height: 3em;
+        }
+      }
+
+      @media only screen and (max-width: 550px)  {
+        .header-image {
+          display: none;
+        }
+        .home {
+          display: none;
+        }
+        .navigation {
+          display: none;
+        }
+        .slim {
+          display: block;
+        }
+        .slim {
+          min-height:3em;
+        }
+
+        div.slim-header {
+          padding: 10px;
+        }
+
+        .slim-navigation {
+          list-style-type: none;
+          margin: 0;
+          margin-top: 1em;
+          padding: 0;
+          width: 100%;
+        }
+
+        div.quote {
+          font-size: 1em;
+          padding-top: 2em;
+          padding-bottom: 2em;
+          color: #333;
+        }
+
+        a {
+          font-size: 1em;
+        }
+      }
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+  </head>
+  <body>
+    <amp-install-serviceworker src="sw.js" data-iframe-src="sw.html" layout="nodisplay"></amp-install-serviceworker>
+    <div class="slim slim-header">
+      <a href="/index.html">
+      <amp-img src="/logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img></a>
+    </div>
+    <ul class="navigation">
+      <li>
+        <a href="/index.html">
+        <amp-img class="header-image" src="/logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img></a>
+      </li>
+      <li class="home">
+        <a href="/index.html">Merula</a>
+      </li>
+      <% sections.each do |other_section| %>
+      <li>
+        <a href="/<%= other_section.id %>.html"><%= other_section.title %> </a>
+      </li>
+      <% end %>
+      <li>
+        <a href="/about.html">Über </a>
+      </li>
+      <li>
+        <a href="/contact.html">Kontakt </a>
+      </li>
+    </ul>
+    <amp-carousel class="top_images" height="210"
       layout="fixed-height"
       type="carousel">
        <% items.each do |item| %>
@@ -130,8 +195,8 @@
           alt="<%= item.title %>"></amp-img></a>
       <% end %>
     </amp-carousel>
-		<div class="quote">
-			<p><strong>Datenschutz</strong></p>
+    <div class="quote">
+      <p><strong>Datenschutz</strong></p>
 <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
 <p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder E-Mail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.</p>
 <p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
@@ -161,17 +226,45 @@
 <p><em>Quellenangabe: <a href="https://www.e-recht24.de">https://www.e-recht24.de</a></em></p>
 </div>
 
-		</div>
-		<ul class="bottom navigation">
-			<li>
-				<a href="/impressum.html">Impressum</a>
-			</li>
-			<li>
-				<a href="/privacy.html" class="active">Datenschutzerklärung</a>
-			</li>
-			<li>
-				<a href="https://www.facebook.com/MerulaDesign/" target="_blank" class="facebook">Facebook</a>
-			</li>
-		</ul>
-	</body>
+    </div>
+    <ul class="bottom navigation">
+      <li>
+        <a href="/impressum.html">Impressum</a>
+      </li>
+      <li>
+        <a href="/privacy.html" class="active">Datenschutzerklärung</a>
+      </li>
+      <li>
+        <a href="https://www.facebook.com/MerulaDesign/" target="_blank" class="facebook">Facebook</a>
+      </li>
+    </ul>
+    <ul class="slim slim-navigation">
+      <li>
+        <amp-img class="header-image" src="logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img>
+      </li>
+      <li class="home">
+        <a href="/index.html">Merula</a>
+      </li>
+      <% sections.each do |other_section| %>
+      <li>
+        <a href="/<%= other_section.id %>.html"><%= other_section.title %> </a>
+      </li>
+      <% end %>
+      <li>
+        <a href="/about.html">Über </a>
+      </li>
+      <li>
+        <a href="/contact.html">Kontakt </a>
+      </li>
+      <li>
+        <a href="/impressum.html">Impressum</a>
+      </li>
+      <li>
+        <a href="/privacy.html">Datenschutzerklärung</a>
+      </li>
+      <li>
+        <a href="https://www.facebook.com/MerulaDesign/" target="_blank"  class="facebook">Facebook</a>
+      </li>
+    </ul>
+  </body>
 </html>
