@@ -68,8 +68,10 @@
         padding-left: 10px;
       }
       div.category_header {
+        font-size: 1.1em;
         background:transparent;
         border:1px solid #fff;
+        color:#bbb;
       }
 
       .subnavigation {
@@ -90,14 +92,14 @@
         color: #46b;
       }
       .navigation.bottom {
+        margin-top: 7em;
         width:30%;
         min-width: 250px;
       }
       div.quote {
         font-size: 1.2em;
         background-color: #bbb;
-        padding-top: 6em;
-        padding-bottom: 6em;
+        padding: 5em 5em 13em 10em;
         color: #333;
       }
       div.quote.center {
@@ -139,8 +141,6 @@
         }
         .slim {
           display: block;
-        }
-        .slim {
           min-height:3em;
         }
 
@@ -156,10 +156,16 @@
           width: 100%;
         }
 
+        .slim-navigation .subnavigation {
+            padding-left: 1em;
+        }
+        div.category_header {
+          font-size: 1em;
+        }
+
         div.quote {
           font-size: 1em;
-          padding-top: 2em;
-          padding-bottom: 2em;
+          padding: 2em;
           color: #333;
         }
 
@@ -179,45 +185,29 @@
     </div>
     <ul class="navigation">
       <li>
-        <amp-img class="header-image" src="logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img>
+        <amp-img class="header-image" src="logo.jpg"  width="220" height="102" alt="Merula Art und Design"></amp-img>
       </li>
       <li class="home">
         <a href="/index.html">Merula</a>
       </li>
-      <!-- <% sections.each do |other_section| %>
+      <% sections.select {|t| t.type == :section && t.parent.nil? }.each do |other_section| %>
       <li>
+        <% if other_section.has_subsections %>
+          <amp-accordion disable-session-states>
+            <section>
+              <div class="category_header"><%= other_section.title %></div>
+              <ul class="subnavigation">
+                <% other_section.subsections.each do |subsection| %>
+                <li><a href="<%= subsection.id %>.html"><%= subsection.title %></a></li>
+                <% end %>
+              </ul>
+            </section>
+          </amp-accordion>
+        <% else %>
         <a href="/<%= other_section.id %>.html"><%= other_section.title %> </a>
+        <% end %>
       </li>
-      <% end %> -->
-      <li>
-        <amp-accordion disable-session-states>
-          <section>
-            <div class="category_header">Larp & Mittelalter</div>
-            <ul class="subnavigation">
-              <li><a href="#">Fiebeln</a></li>
-              <li><a href="#">Ketten & Anhänger</a></li>
-              <li><a href="#">Siegelringe</a></li>
-              <li><a href="#">Sonstiges</a></li>
-            </ul>
-          </section>
-        </amp-accordion>
-      </li>
-      <li>
-        <amp-accordion>
-          <section>
-            <div class="category_header">Schmückendes</div>
-            <ul class="subnavigation">
-              <li><a href="#">Anhänger & Colliers</a></li>
-              <li><a href="#">Ohrringe</a></li>
-              <li><a href="#">Ringe</a></li>
-              <li><a href="#">Sonstiges</a></li>
-            </ul>
-          </section>
-        </amp-accordion>
-      </li>
-      <li>
-        <a href="#">Trauringe</a></li>
-      </li>
+      <% end %>
       <li>
         <a href="/about.html">Über </a>
       </li>
@@ -228,9 +218,9 @@
     <amp-carousel class="top_images" height="210"
       layout="fixed-height"
       type="carousel">
-       <% items.each do |item| %>
+       <% sections.select {|t| t.type == :item && t.promoted }.each do |item| %>
         <a href="/<%= item.section.id %>.html">
-        <amp-img src="/items/<%= item.section.id %>/<%= item.id %>/thumb.png"
+        <amp-img src="<%= item.thumb_url %>"
           width="210"
           height="178"
           alt="<%= item.title %>"></amp-img></a>
@@ -253,7 +243,6 @@
         <a href="https://www.facebook.com/MerulaDesign/" target="_blank"  class="facebook">Facebook</a>
       </li>
     </ul>
-
     <ul class="slim slim-navigation">
       <li>
         <amp-img class="header-image" src="logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img>
@@ -261,9 +250,22 @@
       <li class="home">
         <a href="/index.html">Merula</a>
       </li>
-      <% sections.each do |other_section| %>
+      <% sections.select {|t| t.type == :section && t.parent.nil? }.each do |other_section| %>
       <li>
+        <% if other_section.has_subsections %>
+          <amp-accordion disable-session-states>
+            <section>
+              <div class="category_header"><%= other_section.title %></div>
+              <ul class="subnavigation">
+                <% other_section.subsections.each do |subsection| %>
+                <li><a href="<%= subsection.id %>.html"><%= subsection.title %></a></li>
+                <% end %>
+              </ul>
+            </section>
+          </amp-accordion>
+        <% else %>
         <a href="/<%= other_section.id %>.html"><%= other_section.title %> </a>
+        <% end %>
       </li>
       <% end %>
       <li>
@@ -282,5 +284,6 @@
         <a href="https://www.facebook.com/MerulaDesign/" target="_blank"  class="facebook">Facebook</a>
       </li>
     </ul>
+
   </body>
 </html>

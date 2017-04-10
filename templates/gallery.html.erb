@@ -9,6 +9,7 @@
     <script async custom-element="amp-analytics"
     src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <script async custom-element="amp-lightbox" src="https://cdn.ampproject.org/v0/amp-lightbox-0.1.js"></script>
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
     <link rel="canonical" href="/<%= section.id %>.html">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
      <script type="application/ld+json">
@@ -52,6 +53,20 @@
         padding-top: 10px;
         padding-left: 10px;
       }
+      div.category_header {
+        font-size: 1.1em;
+        background:transparent;
+        border:1px solid #fff;
+        color:#bbb;
+      }
+
+      .subnavigation {
+        background:transparent;
+        border:1px solid #fff;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
       a {
         font-size: 1.1em;
         text-decoration: none;
@@ -65,13 +80,13 @@
         color: #46b;
       }
       .navigation.bottom {
+        margin-top: 7em;
         width:30%;
         min-width: 250px;
       }
 
       div.quote {
-        padding: 7em;
-        padding-right: 2em
+        padding: 5em 5em 13em 10em;
       }
 
       div.quote_container {
@@ -143,8 +158,6 @@
         }
         .slim {
           display: block;
-        }
-        .slim {
           min-height:3em;
         }
 
@@ -159,12 +172,22 @@
           padding: 0;
           width: 100%;
         }
+        .slim-navigation .subnavigation {
+          padding-left: 1em;
+        }
 
         div.quote {
           font-size: 1em;
-          padding-top: 2em;
-          padding-bottom: 2em;
+          padding: 2em;
           color: #333;
+        }
+
+        div.quote.center {
+          text-align: left
+        }
+
+        div.category_header {
+          font-size: 1em;
         }
 
         a {
@@ -193,7 +216,7 @@
   <amp-install-serviceworker src="sw.js" data-iframe-src="sw.html" layout="nodisplay"></amp-install-serviceworker>
     <div class="slim slim-header">
      <a href="/index.html">
-     <amp-img src="/logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img></a>
+     <amp-img src="/logo.jpg"  width="220" height="102" alt="Merula Art und Design"></amp-img></a>
     </div>
     <ul class="navigation">
       <li>
@@ -203,9 +226,22 @@
       <li class="home">
         <a href="/index.html">Merula</a>
       </li>
-      <% sections.each do |other_section| %>
+      <% sections.select {|t| t.type == :section && t.parent.nil? }.each do |other_section| %>
       <li>
-        <a href="/<%= other_section.id %>.html" <%= (other_section.id == section.id) ? 'class="active" ' : '' %>><%= other_section.title %> </a>
+        <% if other_section.has_subsections %>
+          <amp-accordion disable-session-states>
+            <section>
+              <div class="category_header"><%= other_section.title %></div>
+              <ul class="subnavigation">
+                <% other_section.subsections.each do |subsection| %>
+                <li><a href="<%= subsection.id %>.html"><%= subsection.title %></a></li>
+                <% end %>
+              </ul>
+            </section>
+          </amp-accordion>
+        <% else %>
+        <a href="/<%= other_section.id %>.html"><%= other_section.title %> </a>
+        <% end %>
       </li>
       <% end %>
       <li>
@@ -221,7 +257,7 @@
       type="carousel">
       <% section.items.each do |item| %>
         <div on="tap:lightbox_<%= section.id %>_<%= item.id %>" class="clickme">
-        <amp-img src="/items/<%= section.id %>/<%= item.id %>/thumb.png"
+        <amp-img src="<%= item.thumb_url %>"
           width="210"
           height="178"
           alt="<%= item.title %>"></amp-img></div>
@@ -232,9 +268,9 @@
       <div class="lightbox" on="tap:lightbox_<%= section.id %>_<%= item.id %>.close">
         <div>
           <h1><%= item.title %></h1>
-          <amp-img src="/items/<%= section.id %>/<%= item.id %>/main.png"
-            width="420"
-            height="579"
+          <amp-img src="<%= item.main_url %>"
+            width="<%= item.main_width || 420 %>"
+            height="<%= item.main_height || 579 %>"
             alt="<%= item.title %> - Details"></amp-img>
         </div>
       </div>
@@ -267,9 +303,22 @@
       <li class="home">
         <a href="/index.html">Merula</a>
       </li>
-      <% sections.each do |other_section| %>
+      <% sections.select {|t| t.type == :section && t.parent.nil? }.each do |other_section| %>
       <li>
+        <% if other_section.has_subsections %>
+          <amp-accordion disable-session-states>
+            <section>
+              <div class="category_header"><%= other_section.title %></div>
+              <ul class="subnavigation">
+                <% other_section.subsections.each do |subsection| %>
+                <li><a href="<%= subsection.id %>.html"><%= subsection.title %></a></li>
+                <% end %>
+              </ul>
+            </section>
+          </amp-accordion>
+        <% else %>
         <a href="/<%= other_section.id %>.html"><%= other_section.title %> </a>
+        <% end %>
       </li>
       <% end %>
       <li>

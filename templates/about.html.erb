@@ -8,6 +8,7 @@
     <script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
     <script async custom-element="amp-analytics"
     src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
     <link rel="canonical" href="/index.html">
     <link href="https://fonts.googleapis.com/css?family=Gentium+Basic" rel="stylesheet">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
@@ -67,6 +68,20 @@
         padding-top: 10px;
         padding-left: 10px;
       }
+      div.category_header {
+        font-size: 1.1em;
+        background:transparent;
+        border:1px solid #fff;
+        color:#bbb;
+      }
+
+      .subnavigation {
+        background:transparent;
+        border:1px solid #fff;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
       a {
         font-size: 1.1em;
         text-decoration: none;
@@ -81,6 +96,7 @@
       }
 
       .navigation.bottom {
+        margin-top: 7em;
         width:30%;
         min-width: 250px;
       }
@@ -88,7 +104,7 @@
         font-family: 'Gentium Basic', serif;
         font-size: 1.2em;
         background-color: #bbb;
-        padding: 5em;
+        padding: 5em 5em 13em 10em;
         color: #333;
       }
       div.quote a {
@@ -109,6 +125,10 @@
       .slim {
         display: none;
       }
+
+      .caro {
+        margin-left: 1em;
+      }
       @media only screen and (min-width: 551px) and (max-width: 700px)  {
         .header-image {
           display: none;
@@ -118,6 +138,11 @@
         }
         .navigation {
           min-height: 3em;
+        }
+        div.quote {
+          font-size: 1em;
+          padding: 2em;
+          color: #333;
         }
       }
 
@@ -133,8 +158,6 @@
         }
         .slim {
           display: block;
-        }
-        .slim {
           min-height:3em;
         }
 
@@ -149,12 +172,18 @@
           padding: 0;
           width: 100%;
         }
+        .slim-navigation .subnavigation {
+            font-size: 1em;
+        }
 
         div.quote {
           font-size: 1em;
-          padding-top: 2em;
-          padding-bottom: 2em;
+          padding: 2em;
           color: #333;
+        }
+
+        div.category_header {
+          font-size: 1em;
         }
 
         a {
@@ -168,7 +197,7 @@
     <amp-install-serviceworker src="sw.js" data-iframe-src="sw.html" layout="nodisplay"></amp-install-serviceworker>
      <div class="slim slim-header">
       <a href="/index.html">
-      <amp-img src="/logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img></a>
+      <amp-img src="/logo.jpg" width="220" height="102" alt="Merula Art und Design"></amp-img></a>
     </div>
     <ul class="navigation">
       <li>
@@ -178,9 +207,22 @@
       <li class="home">
         <a href="/index.html">Merula</a>
       </li>
-      <% sections.each do |other_section| %>
+      <% sections.select {|t| t.type == :section && t.parent.nil? }.each do |other_section| %>
       <li>
+        <% if other_section.has_subsections %>
+          <amp-accordion disable-session-states>
+            <section>
+              <div class="category_header"><%= other_section.title %></div>
+              <ul class="subnavigation">
+                <% other_section.subsections.each do |subsection| %>
+                <li><a href="<%= subsection.id %>.html"><%= subsection.title %></a></li>
+                <% end %>
+              </ul>
+            </section>
+          </amp-accordion>
+        <% else %>
         <a href="/<%= other_section.id %>.html"><%= other_section.title %> </a>
+        <% end %>
       </li>
       <% end %>
       <li>
@@ -190,17 +232,12 @@
         <a href="/contact.html">Kontakt </a>
       </li>
     </ul>
-    <amp-carousel class="top_images" height="210"
-      layout="fixed-height"
-      type="carousel">
-       <% items.each do |item| %>
-        <a href="/<%= item.section.id %>.html">
-        <amp-img src="/items/<%= item.section.id %>/<%= item.id %>/thumb.png"
-          width="210"
-          height="178"
-          alt="<%= item.title %>"></amp-img></a>
-      <% end %>
-    </amp-carousel>
+    <div class="caro">
+      <amp-img src="caro.jpg"
+        width="210"
+        height="171"
+        alt="Das bin ich"></amp-img></a>
+    </div>
     <div class="quote">
       <p>
       Unter dem Namen Merula Art & Design fertige ich, Goldschmiedin und Kommunikationsdesignerin Carola Brochwitz, Unikatschmuck für jede Gelegenheit. Ob Liverollenspiel, Mittelalter, Trau- und Verlobungsringe oder besonderen Schmuck für den Alltag.
@@ -230,9 +267,22 @@
       <li class="home">
         <a href="/index.html">Merula</a>
       </li>
-      <% sections.each do |other_section| %>
+      <% sections.select {|t| t.type == :section && t.parent.nil? }.each do |other_section| %>
       <li>
+        <% if other_section.has_subsections %>
+          <amp-accordion disable-session-states>
+            <section>
+              <div class="category_header"><%= other_section.title %></div>
+              <ul class="subnavigation">
+                <% other_section.subsections.each do |subsection| %>
+                <li><a href="<%= subsection.id %>.html"><%= subsection.title %></a></li>
+                <% end %>
+              </ul>
+            </section>
+          </amp-accordion>
+        <% else %>
         <a href="/<%= other_section.id %>.html"><%= other_section.title %> </a>
+        <% end %>
       </li>
       <% end %>
       <li>

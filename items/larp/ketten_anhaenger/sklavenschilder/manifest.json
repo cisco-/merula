@@ -1,4 +1,9 @@
 {
 	"title":"Sklavenschilder",
-	"index": 80
+	"index": 35,
+	"main": {
+		"width": 550,
+		"height": 309
+	},
+	"promoted": true
 }

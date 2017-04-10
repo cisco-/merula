@@ -6,14 +6,15 @@ caches.delete('merula');
 
 toolbox.options.debug = true;
 
-var precache = ['/index.html', '/impressum.html', '/privacy.html', '/contact.html', '/logo.jpg']
-<% sections.each do |section| %>
+var precache = ['/index.html', '/impressum.html', '/privacy.html', '/contact.html', '/logo.jpg', '/caro.jpg', '/favicon.ico']
+<% sections.select{|t| t.type == :section && !t.has_subsections }.each do |section| %>
 precache.push('/<%= section.id %>.html');
-	<% section.items.each do |item| %>
-precache.push('/items/<%= section.id %>/<%= item.id %>/thumb.png');
-precache.push('/items/<%= section.id %>/<%= item.id %>/main.png');
-	<% end %>
 <% end %>
+<% sections.select{|t| t.type == :item}.each do |item| %>
+precache.push('<%= item.thumb_url %>');
+precache.push('<%= item.main_url %>');
+<% end %>
+
 toolbox.precache(precache);
 toolbox.router.default = toolbox.cacheFirst;
 

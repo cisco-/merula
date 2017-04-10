@@ -20,39 +20,96 @@ cp_r 'bower_components', 'build/'
 puts "Copying logo"
 cp 'logo.jpg', 'build/logo.jpg'
 
+puts "Copying caro"
+cp 'caro.jpg', 'build/caro.jpg'
+
+puts "Copying favicon.ico"
+cp 'favicon.ico', 'build/favicon.ico'
+
 puts "Copying sw.html"
 cp 'sw.html', 'build/sw.html'
 
+def collect_sections(path, parent = nil, id_prefix=nil)
+	sections = []
+	puts "Checking #{path}/* for sections"
+	Dir.glob("#{path}/*") do
+		|section_path|
+		next unless File.directory?(section_path)
+		section = OpenStruct.new
+		section.type = :section
+		section.parent = parent
+		section.id = (id_prefix.nil? ? '' : (id_prefix + '_')) + section_path.split(/\//).last
+		manifest = JSON.parse(File.read("#{section_path}/manifest.json"), symbolize_names: true)
+		has_subsections = manifest[:subsections]
 
-puts "Collecting metadata"
-# Collect metadata
-sections = []
-all_items = []
-Dir.glob('items/*') do
-	|section_path|
-	section = OpenStruct.new
-	section.id = section_path.split(/\//).last
-	manifest = JSON.parse(File.read("#{section_path}/manifest.json"), symbolize_names: true)
-	section.title = manifest[:title]
-	section.description = File.read("#{section_path}/description.html")
-	section.index = manifest[:index]
-	# Collect items for section
-	section.items = []
-	Dir.glob("#{section_path}/*") do
+		section.title = manifest[:title]
+		section.description = has_subsections ? '' : File.read("#{section_path}/description.html")
+		section.index = manifest[:index]
+		section.has_subsections = has_subsections
+		# Collect items for section
+		if has_subsections
+			section.subsections = collect_sections(section_path, section, section.id)
+		else
+			collect_items(section_path, section)
+		end
+		sections.push(section)
+	end
+	return sections.sort_by {|s| s.index }
+end
+
+def collect_items(path, parent)
+	puts "Checking #{path}/* for items"
+	parent.items = []
+	Dir.glob("#{path}/*") do
 		|item_path|
 		next if item_path =~ /manifest\.json$/
 		next if item_path =~ /\.html$/
 		item = OpenStruct.new
+		item.type = :item
 		item.id = item_path.split(/\//).last
 		item_manifest = JSON.parse(File.read("#{item_path}/manifest.json"), symbolize_names: true)
 		item.title = item_manifest[:title]
-		item.section = section
-		section.items.push(item)
-		all_items.push(item)
+		item.promoted = !!item_manifest[:promoted]
+		item.section = parent
+		item.thumb_url = "/#{item_path}/thumb.jpg"
+		item.main_url = "/#{item_path}/main.jpg"
+		if (item_manifest[:main])
+			item.main_width = item_manifest[:main][:width]
+			item.main_height = item_manifest[:main][:height]
+		end
+		parent.items.push(item)
 	end
-	sections.push(section)
+	# Sort
+	parent.items = parent.items.sort_by  {|item| item.index }
+	return parent.items
 end
-sections = sections.sort_by {|s| s.index }
+
+class SectionTree
+	include Enumerable
+	def initialize(sections)
+		@sections = sections
+	end
+
+	def each(&block)
+		@sections.each do 
+			|section|
+			block.call(section)
+			if (section.has_subsections)
+				SectionTree.new(section.subsections).each(&block)
+			end
+			if (section.items)
+				section.items.each do 
+					|item|
+					block.call(item)
+				end
+			end
+		end
+	end
+end
+
+puts "Collecting metadata"
+# Collect metadata
+sections = SectionTree.new(collect_sections('items'))
 
 puts "Loading templates"
 $templates = {
@@ -65,12 +122,13 @@ $templates = {
 	service_worker: ERB.new(File.read('templates/sw.js.erb'))
 }
 
-def generate_static_page(type, sections, items)
+def generate_static_page(type, sections)
 	b = binding
 	$templates[type].result b
 end
 
 def generate_section(section, sections)
+	active_section = section.parent ? section.parent : section
 	b = binding
 	$templates[:gallery].result b
 end
@@ -84,56 +142,50 @@ end
 puts "Generating build/index.html"
 File.open('build/index.html', 'w') do
 	|fh|
-	fh.puts(generate_static_page(:index, sections, all_items))
+	fh.puts(generate_static_page(:index, sections))
 end
 
 # Generate impressum
 puts "Generating build/impressum.html"
 File.open('build/impressum.html', 'w') do
 	|fh|
-	fh.puts(generate_static_page(:impressum, sections, all_items))
+	fh.puts(generate_static_page(:impressum, sections))
 end
 
 # Generate Datenschutz
 puts "Generating build/privacy.html"
 File.open('build/privacy.html', 'w') do
 	|fh|
-	fh.puts(generate_static_page(:privacy, sections, all_items))
+	fh.puts(generate_static_page(:privacy, sections))
 end
 
 # Generate About
 puts "Generating build/about.html"
 File.open('build/about.html', 'w') do
 	|fh|
-	fh.puts(generate_static_page(:about, sections, all_items))
+	fh.puts(generate_static_page(:about, sections))
 end
 
 # Generate Contact
 puts "Generating build/contact.html"
 File.open('build/contact.html', 'w') do
 	|fh|
-	fh.puts(generate_static_page(:contact, sections, all_items))
+	fh.puts(generate_static_page(:contact, sections))
 end
-
 
 # Generate galleries
-sections.each do 
-	|section|
-	puts "Generating build/#{section.id}.html"
-	File.open("build/#{section.id}.html", 'w') do
+sections.select {|t| t.type == :section && !t.has_subsections }.each do 
+	|leaf_section|
+	puts "Generating build/#{leaf_section.id}.html"
+	File.open("build/#{leaf_section.id}.html", 'w') do
 		|fh|
-		fh.puts(generate_section(section, sections))
+		fh.puts(generate_section(leaf_section, sections))
 	end
-	# Generate item pages
-	mkdir "build/#{section.id}"
 end
 
-
-# Generate overall manifest
+# Generate service worker
 puts "Generating build/sw.js"
 File.open('build/sw.js', 'w') do
 	|fh|
 	fh.puts(generate_service_worker(sections))
 end
-
-
