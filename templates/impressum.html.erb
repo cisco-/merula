@@ -68,7 +68,7 @@
         padding-top: 10px;
         padding-left: 10px;
       }
-      div.category_header {
+      header.category_header {
         font-size: 1.1em;
         background:transparent;
         border:1px solid #fff;
@@ -172,7 +172,7 @@
           color: #333;
         }
 
-        div.category_header {
+        header.category_header {
           font-size: 1em;
         }
 
@@ -187,7 +187,7 @@
     <amp-install-serviceworker src="sw.js" data-iframe-src="sw.html" layout="nodisplay"></amp-install-serviceworker>
      <div class="slim slim-header">
       <a href="/index.html">
-      <amp-img src="/logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img></a>
+      <amp-img src="/logo.jpg" width="220" height="102" alt="Merula Art und Design"></amp-img></a>
     </div>
     <ul class="navigation">
       <li>
@@ -202,7 +202,7 @@
         <% if other_section.has_subsections %>
           <amp-accordion disable-session-states>
             <section>
-              <div class="category_header"><%= other_section.title %></div>
+              <header class="category_header"><%= other_section.title %></header>
               <ul class="subnavigation">
                 <% other_section.subsections.each do |subsection| %>
                 <li><a href="<%= subsection.id %>.html"><%= subsection.title %></a></li>
@@ -270,7 +270,7 @@
         <% if other_section.has_subsections %>
           <amp-accordion disable-session-states>
             <section>
-              <div class="category_header"><%= other_section.title %></div>
+              <header class="category_header"><%= other_section.title %></header>
               <ul class="subnavigation">
                 <% other_section.subsections.each do |subsection| %>
                 <li><a href="<%= subsection.id %>.html"><%= subsection.title %></a></li>

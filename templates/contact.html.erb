@@ -10,7 +10,6 @@
     src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
     <link rel="canonical" href="/index.html">
-    <link href="https://fonts.googleapis.com/css?family=Gentium+Basic" rel="stylesheet">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
      <script type="application/ld+json">
     {
@@ -68,7 +67,7 @@
         padding-top: 10px;
         padding-left: 10px;
       }
-      div.category_header {
+      header.category_header {
         font-size: 1.1em;
         background:transparent;
         border:1px solid #fff;
@@ -101,12 +100,25 @@
         min-width: 250px;
       }
       div.quote {
-        font-family: 'Gentium Basic', serif;
-        font-size: 1.2em;
-        background-color: #bbb;
-        padding: 5em 5em 13em 10em;
-        color: #333;
-      }
+       padding: 5em 5em 13em 10em;
+       max-width: 800px;
+     }
+
+     div.quote_container {
+       font-size: 1.2em;
+       background-color: #bbb;
+       color: #333;
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+       width: 100%;
+       display: flex;
+       align-items: flex-start;
+     }
+
+     div.stretch {
+       flex-grow: 1;
+     }
       div.quote a {
         color: #fff;
       }
@@ -177,7 +189,7 @@
           color: #333;
         }
 
-        div.category_header {
+        header.category_header {
           font-size: 1em;
         }
 
@@ -197,7 +209,7 @@
     <ul class="navigation">
       <li>
         <a href="/index.html">
-        <amp-img class="header-image" src="/logo.jpg" width="242" height="112" alt="Merula Art und Design"></amp-img></a>
+        <amp-img class="header-image" src="/logo.jpg" width="220" height="102" alt="Merula Art und Design"></amp-img></a>
       </li>
       <li class="home">
         <a href="/index.html">Merula</a>
@@ -207,7 +219,7 @@
         <% if other_section.has_subsections %>
           <amp-accordion disable-session-states>
             <section>
-              <div class="category_header"><%= other_section.title %></div>
+              <header class="category_header"><%= other_section.title %></header>
               <ul class="subnavigation">
                 <% other_section.subsections.each do |subsection| %>
                 <li><a href="<%= subsection.id %>.html"><%= subsection.title %></a></li>
@@ -238,8 +250,13 @@
           alt="<%= item.title %>"></amp-img></a>
       <% end %>
     </amp-carousel>
-    <div class="quote center">
-      Kontaktaufnahme ist per Email an <a href="mailto:merula.schmuck@gmail.com">merula.schmuck@gmail.com</a> möglich, oder über meine <a href="https://www.facebook.com/MerulaDesign/" target="_blank"  class="facebook">Facebookseite</a>. 
+    <div class="quote_container">
+      <div class="stretch">
+      &nbsp;
+      </div>
+      <div class="quote center">
+        Kontaktaufnahme ist per Email an <a href="mailto:merula.schmuck@gmail.com">merula.schmuck@gmail.com</a> möglich, oder über meine <a href="https://www.facebook.com/MerulaDesign/" target="_blank"  class="facebook">Facebookseite</a>. 
+      </div>
     </div>
     <ul class="bottom navigation">
       <li>
@@ -264,7 +281,7 @@
         <% if other_section.has_subsections %>
           <amp-accordion disable-session-states>
             <section>
-              <div class="category_header"><%= other_section.title %></div>
+              <header class="category_header"><%= other_section.title %></header>
               <ul class="subnavigation">
                 <% other_section.subsections.each do |subsection| %>
                 <li><a href="<%= subsection.id %>.html"><%= subsection.title %></a></li>
