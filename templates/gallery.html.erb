@@ -256,7 +256,7 @@
       layout="fixed-height"
       type="carousel">
       <% section.items.each do |item| %>
-        <div on="tap:lightbox_<%= section.id %>_<%= item.id %>" class="clickme">
+        <div on="tap:lightbox_<%= section.id %>_<%= item.id %>" class="clickme" role="button" tabindex="0">
         <amp-img src="<%= item.thumb_url %>"
           width="210"
           height="178"
@@ -265,7 +265,7 @@
     </amp-carousel>
     <% section.items.each do |item| %>
     <amp-lightbox id="lightbox_<%= section.id %>_<%= item.id %>" layout="nodisplay">
-      <div class="lightbox" on="tap:lightbox_<%= section.id %>_<%= item.id %>.close">
+      <div class="lightbox" on="tap:lightbox_<%= section.id %>_<%= item.id %>.close" role="button" tabindex="0">
         <div>
           <h1><%= item.title %></h1>
           <amp-img src="<%= item.main_url %>"
